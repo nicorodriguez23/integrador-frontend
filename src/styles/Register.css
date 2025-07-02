@@ -134,7 +134,7 @@ button:active {
 
 /* Estilo de mensajes de error */
 .error-text {
-  color: red;
+  color: #00e6b3;
   font-size: 12px;
   margin-top: 5px;
 }

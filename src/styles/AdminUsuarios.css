@@ -13,22 +13,32 @@
   color:#00ffcc ;
 }
 
+/* FORMULARIO ADMIN USUARIOS AJUSTADO */
 .formulario {
-  margin-bottom: 20px;
-  background-color: #171818 ;
+  margin: 20px auto;
+  background-color: #171818;
   border: 2px solid #00ffcc;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: red;
 }
+
 
 .tabla-usuarios {
   width: 100%;
   border-collapse: collapse;
+  text-align: center;
   
 }
 
 .tabla-usuarios th, .tabla-usuarios td {
   border: 2px solid #00ffcc;
-  padding: 8px;
-  text-align: left;
+  padding: 30px;
+  text-align: center;
 }
 
 .tabla-usuarios th {
@@ -54,11 +64,12 @@
   left: 50%;
   transform: translateX(-50%);
   background-color: #00ffcc;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 6px 12px;
+  border-radius: 5px;
   color: #000000;
   font-weight: bold;
-  box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+  font-size: 14px;
+  box-shadow: 0 0 5px rgba(0, 255, 204, 0.7);
   z-index: 9999;
   animation: fadeinout 2.5s forwards;
 }

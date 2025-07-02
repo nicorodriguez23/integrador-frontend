@@ -160,8 +160,8 @@
 }
 
 .toast-mensaje.success {
-  background-color: #00ffcc;
-  color: #0a0a0a;
+  background-color: #d4edda;
+  color: #00ffcc;
   border: 1px solid #c3e6cb;
 }
 
@@ -222,12 +222,12 @@
 }
 
 .productos-table th {
-  background-color: #1a1a1a;
+  background-color: #333;
   padding: 15px;
   text-align: left;
   font-weight: bold;
   color: #00ffcc;
-  border-bottom: 2px solid #00ffcc;
+  border-bottom: 2px solid #dee2e6;
 }
 
 .productos-table td {
@@ -237,7 +237,7 @@
 }
 
 .productos-table tr:hover {
-  background-color: #1a1a1a;
+  background-color: #333;
 }
 
 .imagen-cell {
@@ -259,12 +259,12 @@
 .nombre-cell strong {
   display: block;
   margin-bottom: 5px;
-  color: #00ffcc;
+  color: #bdf0e5;
 }
 
 .descripcion-mini {
   font-size: 14px;
-  color: #666;
+  color: #00ffcc;
   margin: 0;
 }
 
@@ -289,21 +289,21 @@
 }
 
 .btn-editar {
-  background-color: #00ffcc;
-  color: rgb(10, 10, 10);
+  background-color: #0d0d0e;
+  color: white;
 }
 
 .btn-editar:hover:not(:disabled) {
-  background-color: #307265;
+  background-color: #333;
 }
 
 .btn-eliminar {
-  background-color: #dc3545;
-  color: rgb(10, 10, 10);
+  background-color: #0a0a0a;
+  color: rgb(247, 246, 246);
 }
 
 .btn-eliminar:hover:not(:disabled) {
-  background-color: #c82333;
+  background-color: #333;
 }
 
 .btn-editar:disabled,

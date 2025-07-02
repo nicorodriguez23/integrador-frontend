@@ -36,6 +36,13 @@ const AdminProductos = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.nombre || !formData.precio || !formData.descripcion || !formData.fechaCreacion || !formData.categoria) {
+      setMensaje("Por favor completa todos los campos");
+      setTipoMensaje("error");
+      setTimeout(() => setMensaje(""), 2000);
+      return;
+    }
+
     if (editar) {
       api.put(`/productos/${editar}`, formData).then((res) => {
         setProductos(productos.map((p) => (p.id === editar ? res.data : p)));
@@ -101,14 +108,22 @@ const AdminProductos = () => {
       </header>
 
       <form onSubmit={handleSubmit} className="formulario">
-        <h3>{editar ? "Editar Producto" : "Agregar Producto"}</h3>
         <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} />
         <input type="text" name="precio" placeholder="Precio" value={formData.precio} onChange={handleChange} />
         <input type="text" name="descripcion" placeholder="Descripción" value={formData.descripcion} onChange={handleChange} />
         <input type="text" name="imagen" placeholder="URL de Imagen" value={formData.imagen} onChange={handleChange} />
         <input type="date" name="fechaCreacion" value={formData.fechaCreacion} onChange={handleChange} />
-        <input type="text" name="categoria" placeholder="Categoría" value={formData.categoria} onChange={handleChange} />
-        <button type="submit" className="btn-primary">{editar ? "Actualizar" : "Crear"}</button>
+        <select name="categoria" value={formData.categoria} onChange={handleChange}>
+          <option value="">Selecciona una categoría</option>
+          <option value="Tarjetas Gráficas">Tarjetas Gráficas</option>
+          <option value="Procesadores">Procesadores</option>
+          <option value="Memoria RAM">Memoria RAM</option>
+          <option value="Placas Base">Placas Base</option>
+          <option value="Almacenamiento">Almacenamiento</option>
+          <option value="Fuentes de Poder">Fuentes de Poder</option>
+          <option value="Periféricos">Periféricos</option>
+        </select>
+        <button type="submit" className="btn-crear">{editar ? "Actualizar" : "Crear"}</button>
       </form>
 
       {mensaje && <div className={`toast-mensaje ${tipoMensaje}`}>{mensaje}</div>}
@@ -134,6 +149,7 @@ const AdminProductos = () => {
                       src={imagenesLocales[p.nombre] || p.imagen || "/placeholder.svg"}
                       alt={p.nombre}
                       className="producto-imagen-mini"
+                      onError={(e) => e.target.src = "/placeholder.svg"}
                     />
                   </td>
                   <td className="nombre-cell">
@@ -144,8 +160,8 @@ const AdminProductos = () => {
                   <td>{p.categoria}</td>
                   <td>{new Date(p.fechaCreacion).toLocaleDateString()}</td>
                   <td className="acciones-cell">
-                    <button className="btn-editar" onClick={() => handleEdit(p)}> Editar</button>
-                    <button className="btn-eliminar" onClick={() => handleDelete(p.id)}> Eliminar</button>
+                    <button className="btn-editar" onClick={() => handleEdit(p)}>Editar</button>
+                    <button className="btn-eliminar" onClick={() => handleDelete(p.id)}>Eliminar</button>
                   </td>
                 </tr>
               ))}

@@ -54,7 +54,7 @@ const AdminUsuarios = () => {
           setMensaje("Usuario actualizado con éxito.")
           setEditar(null) // Limpiar el estado de edición
         })
-        .catch((error) => setMensaje("Error al actualizar el usuario"))
+        
     } else {
       // Si estamos creando un nuevo usuario
       api
@@ -63,7 +63,7 @@ const AdminUsuarios = () => {
           setUsuarios([...usuarios, response.data])
           setMensaje("Usuario creado con éxito.")
         })
-        .catch((error) => setMensaje("Error al crear el usuario"))
+        
     }
 
     setFormData({
@@ -83,7 +83,7 @@ const AdminUsuarios = () => {
           setUsuarios(usuarios.filter((user) => user.id !== id))
           setMensaje("Usuario eliminado con éxito.")
         })
-        .catch((error) => setMensaje("Error al eliminar el usuario"))
+        
     }
   }
 

@@ -89,7 +89,8 @@ const Home = () => {
 
       <section id="productos" className="productos">
         <h1>BIENVENIDO A NEONBYTE: TU DESTINO GAMER DEFINITIVO</h1>
-        <strong>En NeonByte, llevamos la experiencia del gaming al siguiente nivel...</strong>
+        <strong>En NeonByte, llevamos la experiencia del gaming al siguiente nivel. Nos especializamos en ofrecer los mejores componentes y periféricos para PC gamer, con productos de última generación, precios competitivos y un servicio de atención al cliente excepcional. Ya sea que busques una tarjeta gráfica potente, un procesador de alto rendimiento o accesorios de primera calidad, en NeonByte encontrarás todo lo que necesitas para armar la PC de tus sueños. Aprovecha nuestras ofertas exclusivas y descuentos en efectivo. ¡Equípate con lo mejor y domina el juego con NeonByte!</strong>
+        
         <h2>Productos Destacados</h2>
 
         <div className="productos-grid">
