@@ -2,8 +2,8 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useState } from "react"
-import Navbar from "./components/Navbar" // Asegúrate de importar el Navbar
-import Footer from "./components/Footer"
+import Navbar from "./components/Navbar" 
+import Footer from "./components/footer"
 
 import Home from "./pages/Home"
 import Contacto from "./pages/Contacto"

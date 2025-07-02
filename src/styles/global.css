@@ -13,8 +13,7 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    /* Si preferís centrar todo, poné esto: */
-    /* justify-content: center; */
+    
 }
 
 /* H1 base para todo */

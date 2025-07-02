@@ -30,7 +30,7 @@ export default function Navbar() {
           <Link to="/admin-productos">
             <img src={carritoIcon} alt="Carrito" className="cart-icon" />
           </Link>
-          {/* Si querés mostrar el contador de carrito, agregás el estado aquí */}
+          
         </div>
       </div>
     </nav>
