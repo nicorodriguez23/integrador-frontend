@@ -1,0 +1,46 @@
+/* Reset básico y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0f0f0f; /* o #124949 si preferís */
+    color: #e0e0e0;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    /* Si preferís centrar todo, poné esto: */
+    /* justify-content: center; */
+}
+
+/* H1 base para todo */
+h1 {
+    font-size: 28px;
+    color: #00ffcc;
+    margin-bottom: 20px;
+}
+
+/* Botones base */
+button {
+    background-color: #00ffcc;
+    color: #000000;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #00e6b3;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(1);
+}

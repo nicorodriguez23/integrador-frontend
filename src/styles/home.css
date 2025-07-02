@@ -1,0 +1,336 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+  background-color: #124949;
+  color: #e0e0e0;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  background-color: #1a1a1a;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo-navbar {
+  height: 50px;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.avatar,
+.cart-icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* Hero Section */
+.hero {
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-btn-container {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.hero-btn {
+  background-color: #00ffcc;
+  color: #000000;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 255, 204, 0.7);
+  position: relative;
+  z-index: 10;
+}
+
+.hero-btn:hover {
+  background-color: #00e6b3;
+}
+
+/* Productos */
+.productos {
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px 20px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.productos h1 {
+  font-size: 28px;
+  color: #00ffcc;
+  margin-bottom: 20px;
+}
+
+.productos h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #00ffcc;
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.producto {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #00ffcc;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+  min-width: 280px;
+}
+
+.producto:hover {
+  transform: scale(1.05);
+}
+
+.producto img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.producto h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.producto p {
+  font-size: 16px;
+  color: #00ffcc;
+  margin-bottom: 10px;
+}
+
+.producto .btn,
+.producto .btn-agregar {
+  display: inline-block;
+  margin-top: 5px;
+  background-color: #00ffcc;
+  color: #000000;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.producto .btn:hover,
+.producto .btn-agregar:hover {
+  background-color: #00e6b3;
+}
+
+/* Footer */
+.footer {
+  margin-top: 40px;
+  padding: 40px 20px;
+  background-color: #1a1a1a;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  color: #b3b3b3;
+  font-size: 14px;
+}
+
+.footer-col {
+  flex: 1 1 200px;
+  margin: 10px;
+}
+
+.footer-col h3 {
+  color: #00ffcc;
+  margin-bottom: 10px;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col a {
+  color: #00ffcc;
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
+}
+
+.footer-col a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .productos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .productos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .producto {
+    min-width: auto;
+  }
+
+  .hero-btn {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+
+/* Contador de productos en el carrito */
+.cart-icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+/* Mensaje toast para confirmaciones (Producto agregado) */
+.toast-mensaje {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #00ffcc;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  animation: fadeInOut 2s forwards;
+  
+  display: inline-block !important;
+  width: auto !important;
+  max-width: 300px !important;
+  min-width: max-content !important;
+}
+
+
+
+
+/* Animación para que aparezca y desaparezca */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -20px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  90% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -20px); }
+}
+
+/* Navbar fijo en la parte superior (se mantiene visible al hacer scroll) */
+.header {
+  background-color: #1a1a1a;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed; /* Fijo en la parte superior */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Agrega sombra para destacarlo */
+}
+
+/* Asegura que el contenido no se oculte debajo del navbar */
+body {
+  padding-top: 80px; /* Ajusta esto según la altura de tu navbar */
+}
+
+/* Botones - Ajustar distancia entre "Ver Detalles" y "Comprar" */
+.producto .btn {
+  margin-right: 10px; /* Agregar margen a la derecha del botón Ver Detalles */
+}
+
+/* Botón de compra con margen */
+.producto .btn-agregar {
+  margin-left: 10px; /* Agregar margen a la izquierda del botón Comprar */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.logo-neonbyte {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  cursor: pointer;
+}
