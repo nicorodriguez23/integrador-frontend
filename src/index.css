@@ -66,3 +66,18 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+body {
+  background: linear-gradient(270deg, #0f0f0f, #1c1c1c);
+  background-size: 400% 400%;
+  animation: fondoAnimado 20s ease infinite;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+
+@keyframes fondoAnimado {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

@@ -26,8 +26,21 @@ const AdminProductos = () => {
   const [tipoMensaje, setTipoMensaje] = useState("");
   const [editar, setEditar] = useState(null);
 
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   useEffect(() => {
-    api.get("/productos").then((res) => setProductos(res.data));
+    api.get("/productos")
+      .then((res) => setProductos(res.data))
+      .catch((err) => {
+        console.error("Error al obtener productos:", err.message);
+        setMensaje("Error al cargar productos");
+        setTipoMensaje("error");
+      });
   }, []);
 
   const handleChange = (e) => {
@@ -44,30 +57,45 @@ const AdminProductos = () => {
     }
 
     if (editar) {
-      api.put(`/productos/${editar}`, formData).then((res) => {
-        setProductos(productos.map((p) => (p.id === editar ? res.data : p)));
-        limpiarFormulario();
-        mostrarMensaje("Producto actualizado", "success");
-      });
+      api.put(`/productos/${editar}`, formData, config)
+        .then((res) => {
+          setProductos(productos.map((p) => (p._id === editar ? res.data : p)));
+          limpiarFormulario();
+          mostrarMensaje("Producto actualizado", "success");
+        })
+        .catch((err) => {
+          mostrarMensaje("Error al actualizar", "error");
+          console.error(err);
+        });
     } else {
-      api.post("/productos", formData).then((res) => {
-        setProductos([...productos, res.data]);
-        limpiarFormulario();
-        mostrarMensaje("Producto creado", "success");
-      });
+      api.post("/productos", formData, config)
+        .then((res) => {
+          setProductos([...productos, res.data]);
+          limpiarFormulario();
+          mostrarMensaje("Producto creado", "success");
+        })
+        .catch((err) => {
+          mostrarMensaje("Error al crear producto", "error");
+          console.error(err);
+        });
     }
   };
 
   const handleEdit = (producto) => {
     setFormData(producto);
-    setEditar(producto.id);
+    setEditar(producto._id);
   };
 
   const handleDelete = (id) => {
-    api.delete(`/productos/${id}`).then(() => {
-      setProductos(productos.filter((p) => p.id !== id));
-      mostrarMensaje("Producto eliminado", "success");
-    });
+    api.delete(`/productos/${id}`, config)
+      .then(() => {
+        setProductos(productos.filter((p) => p._id !== id));
+        mostrarMensaje("Producto eliminado", "success");
+      })
+      .catch((err) => {
+        mostrarMensaje("Error al eliminar", "error");
+        console.error(err);
+      });
   };
 
   const limpiarFormulario = () => {
@@ -143,13 +171,13 @@ const AdminProductos = () => {
             </thead>
             <tbody>
               {productos.map((p) => (
-                <tr key={p.id}>
+                <tr key={p._id}>
                   <td className="imagen-cell">
                     <img
                       src={imagenesLocales[p.nombre] || p.imagen || "/placeholder.svg"}
                       alt={p.nombre}
                       className="producto-imagen-mini"
-                      onError={(e) => e.target.src = "/placeholder.svg"}
+                      onError={(e) => (e.target.src = "/placeholder.svg")}
                     />
                   </td>
                   <td className="nombre-cell">
@@ -161,7 +189,7 @@ const AdminProductos = () => {
                   <td>{new Date(p.fechaCreacion).toLocaleDateString()}</td>
                   <td className="acciones-cell">
                     <button className="btn-editar" onClick={() => handleEdit(p)}>Editar</button>
-                    <button className="btn-eliminar" onClick={() => handleDelete(p.id)}>Eliminar</button>
+                    <button className="btn-eliminar" onClick={() => handleDelete(p._id)}>Eliminar</button>
                   </td>
                 </tr>
               ))}

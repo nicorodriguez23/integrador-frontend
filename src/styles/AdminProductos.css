@@ -25,7 +25,6 @@
   font-size: 1.1rem;
 }
 
-/* Formulario */
 .formulario {
   background: white;
   padding: 30px;
@@ -149,7 +148,6 @@
   background: #5a6268;
 }
 
-/* Mensajes */
 .toast-mensaje {
   padding: 15px 20px;
   border-radius: 5px;
@@ -182,7 +180,6 @@
   }
 }
 
-/* Tabla */
 .tabla-productos {
   background: #171818;
   border-radius: 10px;
@@ -312,7 +309,6 @@
   cursor: not-allowed;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .admin-container {
     padding: 10px;
@@ -363,3 +359,5 @@
     font-size: 12px;
   }
 }
+
+

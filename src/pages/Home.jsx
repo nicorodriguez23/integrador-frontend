@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 import api from "../services/api";
 
-
 import monitorAcer from "../assets/images/monitor.png";
 import tarjetaGrafica from "../assets/images/tarjeta-grafica.png";
 import intelI9 from "../assets/images/intel-i9.png";
@@ -32,9 +31,8 @@ const imagenesLocales = {
   "Auriculares SteelSeries Arctis 7": auricularesSteelSeries,
 };
 
-const Home = () => {
+const Home = ({ usuario, carrito, setCarrito }) => {
   const [productos, setProductos] = useState([]);
-  const [carrito, setCarrito] = useState([]);
   const [mensaje, setMensaje] = useState("");
 
   useEffect(() => {
@@ -51,16 +49,16 @@ const Home = () => {
   }, []);
 
   const agregarAlCarrito = (producto) => {
-    setCarrito((prev) => {
-      const existe = prev.find((item) => item.id === producto.id);
-      if (existe) {
-        return prev.map((item) =>
-          item.id === producto.id ? { ...item, cantidad: item.cantidad + 1 } : item
-        );
-      } else {
-        return [...prev, { ...producto, cantidad: 1 }];
-      }
-    });
+    const existe = carrito.find((item) => item._id === producto._id);
+    const nuevoCarrito = existe
+      ? carrito.map((item) =>
+          item._id === producto._id
+            ? { ...item, cantidad: item.cantidad + 1 }
+            : item
+        )
+      : [...carrito, { ...producto, cantidad: 1 }];
+
+    setCarrito(nuevoCarrito);
     setMensaje(`Se agregó "${producto.nombre}" al carrito`);
     setTimeout(() => setMensaje(""), 2000);
   };
@@ -85,21 +83,31 @@ const Home = () => {
         <a href="#productos" className="btn hero-btn">Ver Productos</a>
       </div>
 
+      {usuario && (
+        <div className="bienvenida-usuario">
+          <h2>Bienvenido, {usuario.nombre}</h2>
+        </div>
+      )}
+
       {mensaje && <div className="toast-mensaje">{mensaje}</div>}
 
       <section id="productos" className="productos">
         <h1>BIENVENIDO A NEONBYTE: TU DESTINO GAMER DEFINITIVO</h1>
-        <strong>En NeonByte, llevamos la experiencia del gaming al siguiente nivel. Nos especializamos en ofrecer los mejores componentes y periféricos para PC gamer, con productos de última generación, precios competitivos y un servicio de atención al cliente excepcional. Ya sea que busques una tarjeta gráfica potente, un procesador de alto rendimiento o accesorios de primera calidad, en NeonByte encontrarás todo lo que necesitas para armar la PC de tus sueños. Aprovecha nuestras ofertas exclusivas y descuentos en efectivo. ¡Equípate con lo mejor y domina el juego con NeonByte!</strong>
-        
+        <strong>
+          En NeonByte, llevamos la experiencia del gaming al siguiente nivel. Nos especializamos en
+          ofrecer los mejores componentes y periféricos para PC gamer, con productos de última
+          generación, precios competitivos y un servicio de atención al cliente excepcional.
+        </strong>
+
         <h2>Productos Destacados</h2>
 
         <div className="productos-grid">
           {productos.map((producto) => (
-            <div key={producto.id} className="producto">
+            <div key={producto._id} className="producto">
               <img src={producto.imagen} alt={producto.nombre} />
               <h3>{producto.nombre}</h3>
               <p>${producto.precio}</p>
-              <Link to={`/producto/${producto.id}`} className="btn">Ver Detalles</Link>
+              <Link to={`/producto/${producto._id}`} className="btn">Ver Detalles</Link>
               <button onClick={() => agregarAlCarrito(producto)} className="btn-agregar">Comprar</button>
             </div>
           ))}

@@ -1,14 +1,9 @@
-/* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Estilos generales */
-
-
-/* Header */
 .header {
   background-color: #1a1a1a;
   width: 100%;
@@ -43,7 +38,6 @@
   height: 40px;
 }
 
-/* Hero Section */
 .hero {
   width: 100%;
   text-align: center;
@@ -86,7 +80,6 @@
   background-color: #00e6b3;
 }
 
-/* Productos */
 .productos {
   width: 100%;
   max-width: 1200px;
@@ -169,7 +162,6 @@
   background-color: #00e6b3;
 }
 
-/* Footer */
 .footer {
   margin-top: 40px;
   padding: 40px 20px;
@@ -207,7 +199,6 @@
   text-decoration: underline;
 }
 
-/* Responsive */
 @media (max-width: 992px) {
   .productos-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -229,7 +220,6 @@
   }
 }
 
-/* Contador de productos en el carrito */
 .cart-icon-container {
   position: relative;
   display: inline-block;
@@ -250,7 +240,6 @@
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
-/* Mensaje toast para confirmaciones (Producto agregado) */
 .toast-mensaje {
   position: fixed;
   top: 20px;
@@ -273,10 +262,6 @@
   min-width: max-content !important;
 }
 
-
-
-
-/* Animación para que aparezca y desaparezca */
 @keyframes fadeInOut {
   0% { opacity: 0; transform: translate(-50%, -20px); }
   10% { opacity: 1; transform: translate(-50%, 0); }
@@ -284,7 +269,6 @@
   100% { opacity: 0; transform: translate(-50%, -20px); }
 }
 
-/* Navbar fijo en la parte superior (se mantiene visible al hacer scroll) */
 .header {
   background-color: #1a1a1a;
   width: 100%;
@@ -292,7 +276,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed; /* Fijo en la parte superior */
+  position: fixed; 
   top: 0;
   left: 0;
   right: 0;
@@ -305,12 +289,11 @@ body {
 }
 
 .producto .btn {
-  margin-right: 10px; /* Agregar margen a la derecha del botón Ver Detalles */
+  margin-right: 10px; 
 }
 
-/* Botón de compra con margen */
 .producto .btn-agregar {
-  margin-left: 10px; /* Agregar margen a la izquierda del botón Comprar */
+  margin-left: 10px; 
 }
 
 * {

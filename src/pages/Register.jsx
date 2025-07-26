@@ -5,15 +5,17 @@ import "../styles/Register.css"
 import api from "../services/api"
 
 const Registro = () => {
-  const [formData, setFormData] = useState({
-    nombre: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    fechaNacimiento: "",
-    provincia: "",
-    observacion: "",
-  })
+const [formData, setFormData] = useState({
+  nombre: "",
+  email: "",
+  password: "",
+  confirmarPassword: "",
+  fechaNacimiento: "",
+  provincia: "",
+  observacion: "",
+  rol: "admin",
+});
+
 
   const [errores, setErrores] = useState({})
 
@@ -44,8 +46,22 @@ const Registro = () => {
       setErrores(erroresValidacion)
     } else {
       try {
-        await api.post("/usuarios", formData)
-        alert("¡Registro enviado con éxito!")
+        const datos = {
+          nombre: formData.nombre,
+          email: formData.email,
+          password: formData.password,
+          rol: "cliente", 
+          fechaNacimiento: new Date(formData.fechaNacimiento).toISOString(), // 👈 se convierte a formato válido
+          provincia: formData.provincia,
+          observacion: formData.observacion,
+        }
+
+        console.log("➡️ Enviando datos:", datos)
+
+        await api.post("/usuarios/register", datos)
+
+        alert("¡Usuario registrado correctamente!")
+
         setFormData({
           nombre: "",
           email: "",
@@ -54,10 +70,13 @@ const Registro = () => {
           fechaNacimiento: "",
           provincia: "",
           observacion: "",
+          rol: "cliente",
+          
         })
         setErrores({})
       } catch (error) {
-        console.error("Error al registrar:", error)
+        console.error("❌ Error al registrar:", error)
+        alert("Hubo un error al registrar el usuario.")
       }
     }
   }
@@ -132,6 +151,10 @@ const Registro = () => {
               />
             </div>
 
+
+
+            
+
             <button type="submit">Registrar</button>
           </form>
         </div>
@@ -139,5 +162,8 @@ const Registro = () => {
     </>
   )
 }
+
+
+
 
 export default Registro

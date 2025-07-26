@@ -4,7 +4,7 @@ import fotoCeo from "../assets/images/foto-integrador.jpg"
 export default function Acerca() {
   return (
     <>
-      {/* Header igual que en Home, sin íconos de usuario/carrito */}
+      
       <header className="header">
         <h1 className="acerca-title">Acerca de Nosotros</h1>
       </header>

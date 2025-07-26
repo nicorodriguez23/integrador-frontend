@@ -1,4 +1,3 @@
-/* Reset básico */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +10,6 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-/* Header */
 .header {
   background-color: #1a1a1a;
   width: 100%;
@@ -42,7 +40,6 @@ body {
   width: 100%;
 }
 
-/* Contenedor principal */
 .contact-container {
   max-width: 1200px;
   margin: auto;
@@ -53,7 +50,6 @@ body {
   gap: 40px;
 }
 
-/* Estilo igual al Register.jsx */
 .form-container {
   background: linear-gradient(145deg, #1a1a1a, #333333);
   padding: 40px;
@@ -124,7 +120,6 @@ button:active {
   transform: scale(1);
 }
 
-/* Mapa */
 .map-container {
   max-width: 500px;
   width: 100%;
@@ -136,7 +131,6 @@ button:active {
   margin-bottom: 10px;
 }
 
-/* Footer */
 .footer {
   background-color: #1a1a1a;
   text-align: center;
@@ -145,7 +139,6 @@ button:active {
   color: #888;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .header-content {
     flex-direction: column;

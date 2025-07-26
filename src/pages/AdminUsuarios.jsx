@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import api from "../services/api" // Asegúrate de que esta sea la URL correcta de la API
+import api from "../services/api" 
 
 import "../styles/AdminUsuarios.css"
 
@@ -14,9 +14,9 @@ const AdminUsuarios = () => {
     fechaNacimiento: "",
   })
   const [mensaje, setMensaje] = useState("")
-  const [editar, setEditar] = useState(null) // Para determinar si estamos editando un usuario
+  const [editar, setEditar] = useState(null) 
 
-  // Cargar usuarios desde MockAPI
+  
   useEffect(() => {
     api
       .get("/usuarios")
@@ -26,7 +26,6 @@ const AdminUsuarios = () => {
       .catch((error) => console.error("Error al obtener usuarios:", error))
   }, [])
 
-  // Función para manejar el cambio en los campos del formulario
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({
@@ -35,28 +34,26 @@ const AdminUsuarios = () => {
     }))
   }
 
-  // Función para manejar la creación o edición de un usuario
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // Validar que todos los campos estén completos
     if (!formData.nombre || !formData.email || !formData.password || !formData.fechaNacimiento) {
       setMensaje("Todos los campos son obligatorios.")
       return
     }
 
-    // Si estamos editando un usuario
+    
     if (editar) {
       api
         .put(`/usuarios/${editar}`, formData)
         .then((response) => {
           setUsuarios(usuarios.map((user) => (user.id === editar ? response.data : user)))
           setMensaje("Usuario actualizado con éxito.")
-          setEditar(null) // Limpiar el estado de edición
+          setEditar(null) 
         })
         
     } else {
-      // Si estamos creando un nuevo usuario
+
       api
         .post("/usuarios", formData)
         .then((response) => {
@@ -74,7 +71,7 @@ const AdminUsuarios = () => {
     })
   }
 
-  // Función para manejar la eliminación de un usuario
+  
   const handleDelete = (id) => {
     if (window.confirm("¿Estás seguro de eliminar este usuario?")) {
       api
@@ -87,7 +84,7 @@ const AdminUsuarios = () => {
     }
   }
 
-  // Función para iniciar la edición de un usuario
+  
   const handleEdit = (user) => {
     setFormData({
       nombre: user.nombre,
@@ -95,7 +92,7 @@ const AdminUsuarios = () => {
       password: user.password,
       fechaNacimiento: user.fechaNacimiento,
     })
-    setEditar(user.id) // Almacenar el ID del usuario que estamos editando
+    setEditar(user.id)
   }
 
   return (

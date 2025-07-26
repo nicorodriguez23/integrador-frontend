@@ -4,7 +4,13 @@ import logoUsuario from "../assets/images/logo-usuario.png";
 import carritoIcon from "../assets/images/carrito.png";
 import "../styles/navbar.css";
 
-export default function Navbar() {
+export default function Navbar({ carrito }) {
+  // Calcular la cantidad total de productos en el carrito
+  const cantidadTotalCarrito = carrito.reduce(
+    (total, item) => total + (item.cantidad || 1),
+    0
+  );
+
   return (
     <nav className="navbar">
       <div className="navbar-logo">
@@ -26,11 +32,15 @@ export default function Navbar() {
         <Link to="/login">
           <img src={logoUsuario} alt="Usuario" className="avatar" />
         </Link>
+
+        {/* Ícono de carrito con contador y link correcto */}
         <div className="cart-icon-container">
-          <Link to="/admin-productos">
+          <Link to="/carrito" className="cart-link">
             <img src={carritoIcon} alt="Carrito" className="cart-icon" />
+            {cantidadTotalCarrito > 0 && (
+              <span className="cart-count">{cantidadTotalCarrito}</span>
+            )}
           </Link>
-          
         </div>
       </div>
     </nav>

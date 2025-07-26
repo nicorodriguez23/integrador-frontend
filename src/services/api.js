@@ -1,9 +1,31 @@
-import axios from "axios"
+import axios from "axios";
 
-// ⚠️  Reemplaza la URL base por la de tu recurso en MockAPI
-export const api = axios.create({
-  baseURL: "https://685bb0dd89952852c2da8de3.mockapi.io",
-  headers: { "Content-Type": "application/json" },
-})
+const api = axios.create({
+  baseURL: "http://localhost:4000/api", 
+});
 
-export default api
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
+
+api.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response && error.response.status === 401) {
+      
+      localStorage.removeItem("token");
+      localStorage.removeItem("usuario");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default api;
