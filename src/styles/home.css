@@ -1,9 +1,21 @@
+/* ===================== RESET ===================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  padding-top: 0x; /* Espacio para el header fijo */
+}
+
+/* ===================== HEADER ===================== */
 .header {
   background-color: #1a1a1a;
   width: 100%;
@@ -11,9 +23,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .logo-section {
@@ -21,8 +36,12 @@
   align-items: center;
 }
 
-.logo-navbar {
+.logo-navbar,
+.logo-neonbyte {
   height: 50px;
+  width: 50px;
+  object-fit: contain;
+  cursor: pointer;
 }
 
 .user-section {
@@ -38,6 +57,27 @@
   height: 40px;
 }
 
+.cart-icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+/* ===================== HERO ===================== */
 .hero {
   width: 100%;
   text-align: center;
@@ -50,17 +90,15 @@
   display: block;
 }
 
-.hero-btn-container a {
-  color: #171818;
-}
-
 .hero-btn-container {
-  
   width: 100%;
   text-align: center;
   margin: 20px 0;
-  color:black ;
-  
+  color: black;
+}
+
+.hero-btn-container a {
+  color: #171818;
 }
 
 .hero-btn {
@@ -80,6 +118,7 @@
   background-color: #00e6b3;
 }
 
+/* ===================== PRODUCTOS ===================== */
 .productos {
   width: 100%;
   max-width: 1200px;
@@ -157,11 +196,20 @@
   transition: background-color 0.3s ease;
 }
 
+.producto .btn {
+  margin-right: 10px;
+}
+
+.producto .btn-agregar {
+  margin-left: 10px;
+}
+
 .producto .btn:hover,
 .producto .btn-agregar:hover {
   background-color: #00e6b3;
 }
 
+/* ===================== FOOTER ===================== */
 .footer {
   margin-top: 40px;
   padding: 40px 20px;
@@ -199,6 +247,7 @@
   text-decoration: underline;
 }
 
+/* ===================== RESPONSIVE ===================== */
 @media (max-width: 992px) {
   .productos-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -220,96 +269,53 @@
   }
 }
 
-.cart-icon-container {
-  position: relative;
-  display: inline-block;
-}
-
-.cart-count {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 12px;
-  font-weight: bold;
-  pointer-events: none;
-  user-select: none;
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
-}
-
+/* ===================== TOAST ===================== */
 .toast-mensaje {
   position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 30px;
+  right: 30px;
   background-color: #00ffcc;
   color: #000;
-  padding: 10px 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 500;
+  box-shadow: 0 6px 16px rgba(0, 255, 204, 0.25);
   z-index: 9999;
-  font-weight: bold;
-  font-size: 14px;
+  max-width: 300px;
   text-align: center;
-  animation: fadeInOut 2s forwards;
-  
-  display: inline-block !important;
-  width: auto !important;
-  max-width: 300px !important;
-  min-width: max-content !important;
-}
-
-@keyframes fadeInOut {
-  0% { opacity: 0; transform: translate(-50%, -20px); }
-  10% { opacity: 1; transform: translate(-50%, 0); }
-  90% { opacity: 1; transform: translate(-50%, 0); }
-  100% { opacity: 0; transform: translate(-50%, -20px); }
-}
-
-.header {
-  background-color: #1a1a1a;
-  width: 100%;
-  padding: 20px;
+  animation: slideIn 0.4s ease-out, fadeOut 0.5s ease-in 2s forwards;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  position: fixed; 
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000; 
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+  gap: 10px;
 }
 
-body {
-  padding-top: 80px;
+.toast-mensaje::before {
+  content: "\2714";
+  font-size: 18px;
 }
 
-.producto .btn {
-  margin-right: 10px; 
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.producto .btn-agregar {
-  margin-left: 10px; 
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-.logo-neonbyte {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  cursor: pointer;
+/* ===================== TABLAS CENTRADAS ===================== */
+.table-centered {
+  margin: 0 auto;
+  width: fit-content;
+  max-width: 100%;
+  text-align: center;
 }

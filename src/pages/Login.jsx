@@ -14,6 +14,7 @@ const Login = ({ setUsuario }) => {
   })
 
   const [error, setError] = useState("")
+  const [mensaje, setMensaje] = useState("")
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -26,6 +27,7 @@ const Login = ({ setUsuario }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError("")
+    setMensaje("")
 
     if (!formData.email || !formData.password) {
       setError("Todos los campos son obligatorios")
@@ -54,14 +56,14 @@ const Login = ({ setUsuario }) => {
       localStorage.setItem("usuario", JSON.stringify(usuarioFinal))
       setUsuario(usuarioFinal)
 
-      // ✅ Mensaje de bienvenida
-      alert(`Bienvenido, ${usuarioFinal.nombre}!`)
-
-      if (usuarioFinal.rol === "admin") {
-        navigate("/admin-productos")
-      } else {
-        navigate("/")
-      }
+      setMensaje(`Bienvenido, ${usuarioFinal.nombre}! 🎮`)
+      setTimeout(() => {
+        if (usuarioFinal.rol === "admin") {
+          navigate("/admin-productos")
+        } else {
+          navigate("/")
+        }
+      }, 1500)
 
     } catch (err) {
       console.error("Error al iniciar sesión:", err)
@@ -94,6 +96,7 @@ const Login = ({ setUsuario }) => {
         </div>
 
         {error && <p className="error">{error}</p>}
+        {mensaje && <div className="toast-mensaje">{mensaje}</div>}
 
         <button type="submit">Ingresar</button>
       </form>

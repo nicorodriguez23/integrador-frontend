@@ -5,19 +5,19 @@ import "../styles/Register.css"
 import api from "../services/api"
 
 const Registro = () => {
-const [formData, setFormData] = useState({
-  nombre: "",
-  email: "",
-  password: "",
-  confirmarPassword: "",
-  fechaNacimiento: "",
-  provincia: "",
-  observacion: "",
-  rol: "admin",
-});
-
+  const [formData, setFormData] = useState({
+    nombre: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    fechaNacimiento: "",
+    provincia: "",
+    observacion: "",
+    rol: "admin",
+  })
 
   const [errores, setErrores] = useState({})
+  const [mensaje, setMensaje] = useState("")
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -44,24 +44,22 @@ const [formData, setFormData] = useState({
 
     if (Object.keys(erroresValidacion).length > 0) {
       setErrores(erroresValidacion)
+      setMensaje("")
     } else {
       try {
         const datos = {
           nombre: formData.nombre,
           email: formData.email,
           password: formData.password,
-          rol: "cliente", 
-          fechaNacimiento: new Date(formData.fechaNacimiento).toISOString(), // 👈 se convierte a formato válido
+          rol: "cliente",
+          fechaNacimiento: new Date(formData.fechaNacimiento).toISOString(),
           provincia: formData.provincia,
           observacion: formData.observacion,
         }
 
-        console.log("➡️ Enviando datos:", datos)
-
         await api.post("/usuarios/register", datos)
 
-        alert("¡Usuario registrado correctamente!")
-
+        setMensaje("¡Usuario registrado correctamente!")
         setFormData({
           nombre: "",
           email: "",
@@ -71,12 +69,11 @@ const [formData, setFormData] = useState({
           provincia: "",
           observacion: "",
           rol: "cliente",
-          
         })
         setErrores({})
       } catch (error) {
         console.error("❌ Error al registrar:", error)
-        alert("Hubo un error al registrar el usuario.")
+        setMensaje("Hubo un error al registrar el usuario.")
       }
     }
   }
@@ -151,19 +148,14 @@ const [formData, setFormData] = useState({
               />
             </div>
 
-
-
-            
-
             <button type="submit">Registrar</button>
           </form>
+
+          {mensaje && <div className="toast-mensaje">✔ {mensaje}</div>}
         </div>
       </div>
     </>
   )
 }
-
-
-
 
 export default Registro
